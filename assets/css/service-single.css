@@ -6,6 +6,26 @@
   padding-top: 1rem;
 }
 
+.service-identity {
+  padding-top: 0.8rem;
+  padding-bottom: 0.6rem;
+}
+
+.service-identity-card {
+  padding: 1.7rem 1.8rem;
+}
+
+.service-identity-card h2 {
+  margin: 0.8rem 0 0.8rem;
+  max-width: 14ch;
+}
+
+.service-identity-card p {
+  margin: 0;
+  max-width: 62ch;
+  color: var(--muted-strong);
+}
+
 .content-grid {
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.5fr);
@@ -48,5 +68,9 @@
 
   .cta-box {
     padding: 1.6rem;
+  }
+
+  .service-identity-card {
+    padding: 1.4rem;
   }
 }

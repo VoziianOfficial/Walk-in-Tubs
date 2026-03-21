@@ -1,20 +1,423 @@
-.story-grid,
-.value-grid {
-  display: grid;
-  gap: 1.8rem;
+.story-shell,
+.values-shell,
+.callout-shell {
+  position: relative;
+  border: 1px solid rgba(23, 28, 32, 0.1);
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.88) 0%, rgba(252, 248, 242, 0.76) 100%);
+  box-shadow: 0 24px 56px rgba(20, 25, 29, 0.08);
+  padding: clamp(1.4rem, 2.4vw, 2.1rem);
+}
+
+.process-shell {
+  position: relative;
+}
+
+.section-index {
+  display: inline-flex;
+  color: rgba(23, 28, 32, 0.42);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.section-index-light {
+  color: rgba(232, 225, 212, 0.58);
+}
+
+.story-section {
+  padding-top: 3.2rem;
 }
 
 .story-grid {
-  grid-template-columns: 0.8fr 1.2fr;
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 3rem;
+  align-items: start;
+  margin-bottom: 2.8rem;
 }
 
-.value-grid {
-  grid-template-columns: repeat(3, 1fr);
+.story-intro {
+  max-width: 22rem;
 }
 
-@media (max-width: 900px) {
+.story-intro h2 {
+  margin: 1rem 0 1.1rem;
+  font-size: clamp(2.8rem, 5vw, 4.9rem);
+  line-height: 0.94;
+  letter-spacing: -0.05em;
+}
+
+.story-line {
+  width: 4.8rem;
+  height: 1px;
+  background: rgba(23, 28, 32, 0.16);
+}
+
+.story-copy {
+  max-width: 42rem;
+  padding-top: 0.4rem;
+}
+
+.story-copy p {
+  margin: 0;
+  color: var(--muted-strong);
+  font-size: 1.08rem;
+  line-height: 1.86;
+}
+
+.story-copy p + p {
+  margin-top: 1rem;
+}
+
+.story-lead {
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.about-image-panel,
+.process-image-panel {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid rgba(23, 28, 32, 0.1);
+  border-radius: 26px;
+  box-shadow: var(--shadow-strong);
+}
+
+.about-image-panel img,
+.process-image-panel img {
+  width: 100%;
+  display: block;
+}
+
+.values-section {
+  padding-top: 1.8rem;
+}
+
+.values-header {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 2.2rem;
+}
+
+.values-header h2 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(2.4rem, 4vw, 4rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.editorial-values {
+  gap: 0;
+  border-top: 1px solid rgba(23, 28, 32, 0.1);
+  border-left: 1px solid rgba(23, 28, 32, 0.1);
+}
+
+.philosophy-card {
+  display: grid;
+  align-content: start;
+  gap: 0.8rem;
+  min-height: 100%;
+  border-radius: 0;
+  border-top: 0;
+  border-left: 0;
+  border-right: 1px solid rgba(23, 28, 32, 0.1);
+  border-bottom: 1px solid rgba(23, 28, 32, 0.1);
+  background: rgba(255, 252, 248, 0.74);
+  box-shadow: none;
+  padding: 2.5rem 2.2rem 2.3rem;
+}
+
+.philosophy-index {
+  display: inline-flex;
+  margin-bottom: 2.2rem;
+  color: rgba(23, 62, 59, 0.6);
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.philosophy-card h3 {
+  max-width: 11ch;
+  margin: 0;
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 0.98;
+}
+
+.philosophy-card p {
+  margin: 0.15rem 0 0;
+  max-width: 28ch;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.philosophy-icon {
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(23, 28, 32, 0.12);
+  background: rgba(255, 252, 246, 0.88);
+}
+
+.philosophy-icon svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: rgba(23, 62, 59, 0.86);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.process-section {
+  padding-top: 1.8rem;
+}
+
+.process-panel {
+  display: grid;
+  grid-template-columns: 0.94fr 1.06fr;
+  min-height: 38rem;
+  overflow: hidden;
+  border-radius: 32px;
+  background: linear-gradient(90deg, #070809 0%, #070809 46%, #101214 46%, #16191b 100%);
+  box-shadow: 0 30px 80px rgba(7, 9, 10, 0.34);
+}
+
+.process-copy {
+  padding: 4rem 3.4rem;
+  color: rgba(245, 241, 232, 0.92);
+}
+
+.process-copy h2 {
+  max-width: 10ch;
+  margin: 1.2rem 0 1.8rem;
+  color: rgba(245, 241, 232, 0.96);
+  font-size: clamp(3rem, 5vw, 5.4rem);
+  line-height: 0.92;
+  letter-spacing: -0.05em;
+}
+
+.process-copy p {
+  max-width: 31rem;
+  margin: 0;
+  color: rgba(227, 220, 209, 0.76);
+  font-size: 1.04rem;
+  line-height: 1.8;
+}
+
+.process-copy p + p {
+  margin-top: 1rem;
+}
+
+.process-image-panel {
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  position: relative;
+}
+
+.process-image-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.44)),
+    linear-gradient(90deg, rgba(16, 18, 20, 0.3), rgba(16, 18, 20, 0));
+}
+
+.process-image-panel img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.callout-section {
+  padding-top: 1.8rem;
+}
+
+.testimonials-section {
+  padding-top: 1.8rem;
+}
+
+.testimonials-shell {
+  position: relative;
+  border: 1px solid rgba(23, 28, 32, 0.1);
+  border-radius: 30px;
+  background:
+    linear-gradient(180deg, rgba(255, 253, 249, 0.88) 0%, rgba(252, 248, 242, 0.76) 100%);
+  box-shadow: 0 24px 56px rgba(20, 25, 29, 0.08);
+  padding: clamp(1.4rem, 2.4vw, 2.1rem);
+}
+
+.testimonials-header {
+  display: grid;
+  grid-template-columns: 0.78fr 1.22fr;
+  gap: 2rem;
+  align-items: end;
+  margin-bottom: 1.8rem;
+}
+
+.testimonials-header h2 {
+  margin: 0;
+  max-width: 13ch;
+  font-size: clamp(2.3rem, 4vw, 3.8rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.testimonial-card {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.8rem;
+  min-height: 100%;
+  padding: 1.55rem 1.45rem;
+  border-radius: 20px;
+  background: rgba(255, 252, 247, 0.86);
+}
+
+.testimonial-icon {
+  width: 2.05rem;
+  height: 2.05rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(23, 28, 32, 0.12);
+  background: rgba(255, 252, 246, 0.84);
+}
+
+.testimonial-icon svg {
+  width: 0.98rem;
+  height: 0.98rem;
+  fill: none;
+  stroke: rgba(23, 62, 59, 0.82);
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.testimonial-quote {
+  margin: 0.05rem 0 0;
+  color: var(--muted-strong);
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.16rem, 1.9vw, 1.5rem);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+}
+
+.testimonial-author {
+  margin: 1.1rem 0 0;
+  color: rgba(23, 62, 59, 0.76);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.callout-grid {
+  display: grid;
+  grid-template-columns: 0.82fr 1.18fr;
+  gap: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(23, 28, 32, 0.1);
+}
+
+.callout-intro h2 {
+  max-width: 11ch;
+  margin: 1rem 0 0;
+  font-size: clamp(2.5rem, 4vw, 4.2rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.callout-quote p {
+  margin: 0 0 1.6rem;
+  max-width: 30rem;
+  color: var(--muted-strong);
+  font-family: "Fraunces", serif;
+  font-size: clamp(1.8rem, 3.2vw, 3rem);
+  font-style: italic;
+  line-height: 1.32;
+  letter-spacing: -0.03em;
+}
+
+.callout-quote .btn {
+  margin-top: 0.25rem;
+}
+
+@media (max-width: 980px) {
   .story-grid,
-  .value-grid {
+  .values-header,
+  .testimonials-header,
+  .callout-grid,
+  .process-panel {
     grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .process-panel {
+    min-height: auto;
+  }
+
+  .process-copy {
+    padding: 2.5rem 1.8rem;
+  }
+
+  .process-image-panel {
+    min-height: 22rem;
+  }
+
+  .philosophy-card {
+    padding: 1.9rem 1.6rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .story-section,
+  .values-section,
+  .process-section,
+  .testimonials-section,
+  .callout-section {
+    padding-top: 1.4rem;
+  }
+
+  .story-grid {
+    gap: 1.8rem;
+    margin-bottom: 1.7rem;
+  }
+
+  .story-shell,
+  .values-shell,
+  .testimonials-shell,
+  .callout-shell {
+    border-radius: 24px;
+    padding: 1.2rem;
+  }
+
+  .values-header,
+  .callout-grid {
+    gap: 1.6rem;
+  }
+
+  .process-copy {
+    padding: 2rem 1.4rem;
   }
 }

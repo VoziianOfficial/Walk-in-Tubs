@@ -2,6 +2,7 @@ const body = document.body;
 const header = document.querySelector(".site-header");
 const nav = document.querySelector(".site-nav");
 const navToggle = document.querySelector(".nav-toggle");
+const headerActions = document.querySelector(".header-actions");
 const faqButtons = document.querySelectorAll(".faq-question");
 const forms = document.querySelectorAll("form[data-form-type]");
 const revealTargets = document.querySelectorAll(".feature-card, .service-card, .detail-card, .contact-card, .contact-info-card, .service-overview-card, .step-card, .faq-item, .value-item, .quote-panel, .editorial-image");
@@ -27,6 +28,22 @@ if (nav && navToggle) {
       body.classList.remove("menu-open");
     });
   });
+}
+
+if (headerActions && !headerActions.querySelector(".header-email.desktop-email")) {
+  const desktopEmail = document.createElement("a");
+  desktopEmail.className = "header-email desktop-email";
+  desktopEmail.href = "mailto:hello@walkintubguide.com?subject=Request%20Estimate";
+  desktopEmail.innerHTML = '<span class="header-email-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img" focusable="false"><path d="M3 7l9 6 9-6" /><rect x="3" y="6" width="18" height="12" rx="2" /></svg></span><span>Request Estimate</span>';
+
+  const mobileEmail = document.createElement("a");
+  mobileEmail.className = "header-email mobile-email";
+  mobileEmail.href = desktopEmail.href;
+  mobileEmail.setAttribute("aria-label", "Request estimate by email");
+  mobileEmail.innerHTML = '<span class="header-email-icon" aria-hidden="true"><svg viewBox="0 0 24 24" role="img" focusable="false"><path d="M3 7l9 6 9-6" /><rect x="3" y="6" width="18" height="12" rx="2" /></svg></span>';
+
+  headerActions.insertBefore(desktopEmail, navToggle || null);
+  headerActions.insertBefore(mobileEmail, desktopEmail);
 }
 
 faqButtons.forEach((button) => {

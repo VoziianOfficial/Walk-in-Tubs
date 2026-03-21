@@ -162,8 +162,8 @@
   color: rgba(222, 217, 207, 0.8);
 }
 
-.hero-card {
-  padding: 2.15rem;
+.hero-insight-panel {
+  padding: 1.25rem;
   position: relative;
   background:
     linear-gradient(180deg, rgba(255, 252, 248, 0.96), rgba(241, 234, 224, 0.92));
@@ -171,8 +171,8 @@
   box-shadow: 0 26px 64px rgba(8, 9, 10, 0.34);
 }
 
-.hero-card-body {
-  padding-top: 1.7rem;
+.hero-insight-content {
+  padding: 1.35rem 0.8rem 0.6rem;
 }
 
 .card-label {
@@ -183,32 +183,82 @@
   color: var(--muted-strong);
 }
 
-.mini-stat strong,
-.score-ring span {
-  color: var(--muted-strong);
-}
-
-.score-ring {
-  display: grid;
-  place-items: center;
-  width: 12rem;
-  aspect-ratio: 1;
-  margin: 1.4rem auto 1.65rem;
-  border-radius: 50%;
-  border: 1rem solid rgba(37, 95, 88, 0.12);
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.95) 48%, rgba(184, 139, 74, 0.09) 100%);
-  text-align: center;
-}
-
-.score-ring strong {
+.hero-insight-head h3 {
+  margin: 0.5rem 0 0.65rem;
   font-family: "Fraunces", serif;
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 2vw, 1.9rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+  color: var(--text);
 }
 
-.mini-stat + .mini-stat {
-  margin-top: 1.2rem;
-  padding-top: 1.2rem;
-  border-top: 1px solid rgba(23, 28, 32, 0.08);
+.hero-insight-media {
+  border-radius: 18px;
+}
+
+.hero-insight-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.hero-insight-badges span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 1.95rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid rgba(23, 28, 32, 0.12);
+  background: rgba(255, 255, 255, 0.62);
+  color: rgba(24, 33, 38, 0.78);
+  font-size: 0.66rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 800;
+}
+
+.hero-insight-list {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.78rem;
+}
+
+.hero-insight-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.7rem;
+  align-items: start;
+  padding-top: 0.78rem;
+  border-top: 1px solid rgba(23, 28, 32, 0.09);
+}
+
+.hero-insight-list li span {
+  display: inline-grid;
+  place-items: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(31, 78, 73, 0.16), rgba(31, 78, 73, 0.08));
+  color: var(--brand-deep);
+  font-size: 0.63rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+}
+
+.hero-insight-list li strong {
+  display: block;
+  color: var(--text);
+  font-size: 0.97rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-insight-list li p {
+  margin: 0.18rem 0 0;
+  color: var(--muted-strong);
+  font-size: 0.9rem;
+  line-height: 1.52;
 }
 
 .benefit-grid,
@@ -524,9 +574,13 @@
     min-width: 0;
   }
 
-  .hero-card,
+  .hero-insight-panel,
   .lead-section .lead-form {
     padding: 1.55rem;
+  }
+
+  .hero-insight-content {
+    padding: 1.1rem 0.1rem 0;
   }
 
   .service-overview-card {
