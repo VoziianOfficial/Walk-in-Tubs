@@ -271,18 +271,24 @@
 
 .testimonials-header {
   display: grid;
-  grid-template-columns: 0.78fr 1.22fr;
-  gap: 2rem;
-  align-items: end;
-  margin-bottom: 1.8rem;
+  grid-template-columns: 1fr;
+  gap: 1.2rem;
+
+  justify-items: center;
+  text-align: center;
+
+  margin-bottom: 2.4rem;
 }
 
 .testimonials-header h2 {
   margin: 0;
-  max-width: 13ch;
+  max-width: 20ch;
+
   font-size: clamp(2.3rem, 4vw, 3.8rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+
+  text-wrap: balance;
 }
 
 .testimonials-grid {
