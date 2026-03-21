@@ -1,0 +1,52 @@
+.service-hero {
+  padding-bottom: 3rem;
+}
+
+.service-layout {
+  padding-top: 1rem;
+}
+
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.5fr);
+  gap: 1.8rem;
+  align-items: start;
+}
+
+.content-stack {
+  display: grid;
+  gap: 1.35rem;
+}
+
+.detail-list {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.ordered {
+  padding-left: 1.1rem;
+}
+
+.sticky-cta {
+  position: sticky;
+  top: 7rem;
+}
+
+.cta-box {
+  padding: 2rem;
+  box-shadow: var(--shadow-strong);
+}
+
+@media (max-width: 920px) {
+  .content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sticky-cta {
+    position: static;
+  }
+
+  .cta-box {
+    padding: 1.6rem;
+  }
+}
