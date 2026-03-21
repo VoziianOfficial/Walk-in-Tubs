@@ -356,6 +356,11 @@ body[data-page="services"] .site-nav a::after {
 }
 
 @media (max-width: 720px) {
+  .service-grid.swipe-track {
+    grid-auto-columns: min(88%, 25rem);
+    gap: 0.95rem;
+  }
+
   .service-card {
     padding: 1.4rem;
     gap: 0.9rem;

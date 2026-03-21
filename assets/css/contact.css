@@ -33,6 +33,7 @@
 
 .contact-form {
   gap: 0.82rem;
+  max-width: 40rem;
 }
 
 .contact-badges {
@@ -61,6 +62,20 @@
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 0.72rem 0.8rem;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea {
+  border-radius: 0.82rem;
+  min-height: 2.85rem;
+  padding: 0.72rem 0.82rem;
+}
+
+.contact-form textarea {
+  min-height: 6rem;
+  max-height: 8.6rem;
+  resize: none;
 }
 
 .contact-form-grid label {
@@ -128,7 +143,7 @@
 
 .map-embed iframe {
   width: 100%;
-  height: 250px;
+  height: 280px;
   border: 0;
   filter: grayscale(20%) contrast(1.06) saturate(0.9);
   transition: filter 0.35s ease, transform 0.35s ease;
@@ -144,6 +159,21 @@
     padding: 1.35rem;
   }
 
+  .contact-form {
+    max-width: 100%;
+  }
+
+  .contact-form label {
+    font-size: 0.9rem;
+  }
+
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    min-height: 2.75rem;
+    font-size: 0.95rem;
+  }
+
   .contact-badges {
     gap: 0.42rem;
   }
@@ -157,7 +187,7 @@
   }
 
   .map-embed iframe {
-    height: 220px;
+    height: 240px;
   }
 }
 

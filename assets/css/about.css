@@ -433,6 +433,22 @@
     gap: 1.6rem;
   }
 
+  .editorial-values.swipe-track {
+    border: 0;
+    background: transparent;
+  }
+
+  .editorial-values.swipe-track .philosophy-card {
+    border: 1px solid rgba(23, 28, 32, 0.1);
+    border-radius: 20px;
+    background: rgba(255, 252, 247, 0.9);
+    box-shadow: 0 14px 28px rgba(20, 25, 29, 0.09);
+  }
+
+  .testimonials-grid.swipe-track .testimonial-card {
+    min-height: 100%;
+  }
+
   .process-copy {
     padding: 2rem 1.4rem;
   }
