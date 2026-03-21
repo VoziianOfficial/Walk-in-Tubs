@@ -87,7 +87,41 @@ body[data-page="legal"] {
 }
 
 @media (max-width: 720px) {
+  .legal-hero {
+    padding-bottom: 2.2rem;
+  }
+
+  .legal-hero h1 {
+    max-width: 100%;
+  }
+
+  .legal-shell {
+    gap: 0.8rem;
+  }
+
+  .legal-nav {
+    gap: 0.45rem;
+  }
+
+  .legal-nav a {
+    min-height: 2.05rem;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.09em;
+  }
+
   .legal-card {
     padding: 1.35rem;
+    border-radius: 18px;
+  }
+
+  .legal-card h2 {
+    margin-bottom: 0.55rem;
+    font-size: clamp(1.42rem, 5.2vw, 1.9rem);
+  }
+
+  .legal-card p {
+    font-size: 0.95rem;
+    line-height: 1.65;
   }
 }

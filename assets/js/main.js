@@ -33,10 +33,74 @@ if (nav && navToggle) {
     nav.appendChild(menuExtra);
   }
 
+  const servicesLink = Array.from(nav.querySelectorAll(":scope > a")).find((link) => (link.getAttribute("href") || "").includes("services.html"));
+  if (servicesLink && !nav.querySelector(".mobile-services-row")) {
+    const servicesAnchorNext = servicesLink.nextElementSibling;
+    const servicesRow = document.createElement("div");
+    servicesRow.className = "mobile-services-row";
+
+    servicesLink.classList.add("mobile-services-link");
+    servicesRow.appendChild(servicesLink);
+
+    const servicesToggle = document.createElement("button");
+    servicesToggle.type = "button";
+    servicesToggle.className = "mobile-services-toggle";
+    servicesToggle.setAttribute("aria-expanded", "false");
+    servicesToggle.setAttribute("aria-label", "Open services submenu");
+    servicesToggle.innerHTML = `
+      <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
+        <path d="M7 10l5 5 5-5" />
+      </svg>
+    `;
+    servicesRow.appendChild(servicesToggle);
+    nav.insertBefore(servicesRow, servicesAnchorNext);
+
+    const servicesMenu = document.createElement("div");
+    servicesMenu.className = "mobile-services-menu";
+    servicesMenu.setAttribute("aria-label", "Services submenu");
+    const serviceSubLinks = [
+      { href: `${legalRootPrefix}services.html`, label: "All Services" },
+      { href: `${legalRootPrefix}services/walk-in-tub-installation.html`, label: "Installation" },
+      { href: `${legalRootPrefix}services/walk-in-tub-replacement.html`, label: "Replacement" },
+      { href: `${legalRootPrefix}services/walk-in-tub-repair.html`, label: "Repair" },
+      { href: `${legalRootPrefix}services/walk-in-tub-conversion.html`, label: "Conversion" },
+      { href: `${legalRootPrefix}services/hydrotherapy-walk-in-tubs.html`, label: "Hydrotherapy" },
+      { href: `${legalRootPrefix}services/accessible-bathroom-upgrades.html`, label: "Accessible Upgrades" },
+    ];
+    serviceSubLinks.forEach((item) => {
+      const link = document.createElement("a");
+      link.href = item.href;
+      link.textContent = item.label;
+      servicesMenu.appendChild(link);
+    });
+    servicesRow.insertAdjacentElement("afterend", servicesMenu);
+
+    servicesToggle.addEventListener("click", () => {
+      const expanded = servicesToggle.getAttribute("aria-expanded") === "true";
+      servicesToggle.setAttribute("aria-expanded", String(!expanded));
+      servicesToggle.setAttribute("aria-label", expanded ? "Open services submenu" : "Close services submenu");
+      servicesMenu.classList.toggle("is-open", !expanded);
+      servicesRow.classList.toggle("is-open", !expanded);
+    });
+
+    servicesLink.addEventListener("click", (event) => {
+      if (window.innerWidth <= 980) {
+        event.preventDefault();
+        servicesToggle.click();
+      }
+    });
+  }
+
   const closeNav = () => {
     nav.classList.remove("is-open");
     navToggle.setAttribute("aria-expanded", "false");
     navToggle.setAttribute("aria-label", "Open menu");
+    nav.querySelectorAll(".mobile-services-toggle").forEach((toggle) => {
+      toggle.setAttribute("aria-expanded", "false");
+      toggle.setAttribute("aria-label", "Open services submenu");
+    });
+    nav.querySelectorAll(".mobile-services-menu").forEach((submenu) => submenu.classList.remove("is-open"));
+    nav.querySelectorAll(".mobile-services-row").forEach((row) => row.classList.remove("is-open"));
     body.classList.remove("menu-open");
   };
 
@@ -48,7 +112,7 @@ if (nav && navToggle) {
     body.classList.toggle("menu-open", !expanded);
   });
 
-  nav.querySelectorAll("a").forEach((link) => {
+  nav.querySelectorAll("a:not(.mobile-services-link)").forEach((link) => {
     link.addEventListener("click", () => {
       closeNav();
     });
@@ -70,14 +134,195 @@ if (nav && navToggle) {
 const swipeGridSelector = ".benefit-grid, .service-overview-grid, .steps-grid, .value-grid, .testimonials-grid, .service-grid";
 const swipeGrids = document.querySelectorAll(swipeGridSelector);
 
+const sliderState = new WeakMap();
+
+const cleanupLoopTrack = (grid) => {
+  const state = sliderState.get(grid);
+  if (state?.onScroll) {
+    grid.removeEventListener("scroll", state.onScroll);
+  }
+  if (state?.onDotClick && state?.pagination) {
+    state.pagination.removeEventListener("click", state.onDotClick);
+  }
+  if (state?.pagination) {
+    state.pagination.remove();
+  }
+  if (state?.clearSnapTimer) {
+    state.clearSnapTimer();
+  }
+  sliderState.delete(grid);
+  grid.querySelectorAll(".swipe-clone").forEach((clone) => clone.remove());
+  grid.classList.remove("is-loop-track");
+  grid.removeAttribute("tabindex");
+  grid.removeAttribute("role");
+  grid.removeAttribute("aria-label");
+  grid.scrollLeft = 0;
+  delete grid.dataset.loopReady;
+};
+
+const setupLoopTrack = (grid) => {
+  if (grid.dataset.loopReady === "true") {
+    return;
+  }
+
+  const originalSlides = Array.from(grid.children).filter((child) => !child.classList.contains("swipe-clone"));
+  if (originalSlides.length < 2) {
+    return;
+  }
+
+  const firstClone = originalSlides[0].cloneNode(true);
+  const lastClone = originalSlides[originalSlides.length - 1].cloneNode(true);
+  firstClone.classList.add("swipe-clone");
+  lastClone.classList.add("swipe-clone");
+  firstClone.setAttribute("aria-hidden", "true");
+  lastClone.setAttribute("aria-hidden", "true");
+  firstClone.querySelectorAll("a, button, input, select, textarea, [tabindex]").forEach((item) => item.setAttribute("tabindex", "-1"));
+  lastClone.querySelectorAll("a, button, input, select, textarea, [tabindex]").forEach((item) => item.setAttribute("tabindex", "-1"));
+
+  grid.appendChild(firstClone);
+  grid.insertBefore(lastClone, grid.firstChild);
+  grid.classList.add("is-loop-track");
+  grid.dataset.loopReady = "true";
+  grid.setAttribute("tabindex", "0");
+  grid.setAttribute("role", "region");
+  grid.setAttribute("aria-label", "Swipe cards");
+
+  const slideStep = () => {
+    const firstReal = Array.from(grid.children).find((child) => !child.classList.contains("swipe-clone"));
+    if (!firstReal) {
+      return 0;
+    }
+    const gapRaw = window.getComputedStyle(grid).columnGap || window.getComputedStyle(grid).gap || "0px";
+    const gap = Number.parseFloat(gapRaw) || 0;
+    return firstReal.getBoundingClientRect().width + gap;
+  };
+
+  requestAnimationFrame(() => {
+    const step = slideStep();
+    if (step > 0) {
+      grid.scrollLeft = step;
+    }
+  });
+
+  const pagination = document.createElement("div");
+  pagination.className = "swipe-pagination";
+  pagination.setAttribute("aria-label", "Slider pagination");
+  originalSlides.forEach((_, index) => {
+    const dot = document.createElement("button");
+    dot.type = "button";
+    dot.className = "swipe-dot";
+    dot.setAttribute("aria-label", `Go to card ${index + 1}`);
+    dot.dataset.index = String(index);
+    pagination.appendChild(dot);
+  });
+  grid.insertAdjacentElement("afterend", pagination);
+
+  const updatePagination = () => {
+    const step = slideStep();
+    if (step <= 0) {
+      return;
+    }
+    const totalReal = originalSlides.length;
+    const normalized = ((grid.scrollLeft / step) - 1 + totalReal) % totalReal;
+    const activeIndex = Math.round(normalized) % totalReal;
+    pagination.querySelectorAll(".swipe-dot").forEach((dot, index) => {
+      dot.classList.toggle("is-active", index === activeIndex);
+      dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
+    });
+  };
+
+  const onDotClick = (event) => {
+    const target = event.target.closest(".swipe-dot");
+    if (!target) {
+      return;
+    }
+    const step = slideStep();
+    const targetIndex = Number.parseInt(target.dataset.index || "0", 10);
+    if (step > 0) {
+      grid.scrollTo({
+        left: step * (targetIndex + 1),
+        behavior: "smooth",
+      });
+    }
+  };
+  pagination.addEventListener("click", onDotClick);
+
+  let isAdjusting = false;
+  let snapTimer = null;
+  const onScroll = () => {
+    if (!grid.classList.contains("swipe-track")) {
+      return;
+    }
+    if (isAdjusting) {
+      return;
+    }
+
+    const step = slideStep();
+    if (step <= 0) {
+      return;
+    }
+
+    const totalReal = originalSlides.length;
+    const leftBoundary = step * 0.35;
+    const rightBoundary = step * (totalReal + 0.65);
+
+    if (grid.scrollLeft <= leftBoundary) {
+      isAdjusting = true;
+      grid.scrollLeft = step * totalReal;
+      requestAnimationFrame(() => {
+        isAdjusting = false;
+        updatePagination();
+      });
+    } else if (grid.scrollLeft >= rightBoundary) {
+      isAdjusting = true;
+      grid.scrollLeft = step;
+      requestAnimationFrame(() => {
+        isAdjusting = false;
+        updatePagination();
+      });
+    }
+    if (snapTimer) {
+      window.clearTimeout(snapTimer);
+    }
+    snapTimer = window.setTimeout(() => {
+      if (!grid.classList.contains("swipe-track") || isAdjusting) {
+        return;
+      }
+      const snapIndex = Math.round(grid.scrollLeft / step);
+      grid.scrollTo({
+        left: snapIndex * step,
+        behavior: "smooth",
+      });
+    }, 120);
+    updatePagination();
+  };
+  grid.addEventListener("scroll", onScroll, { passive: true });
+
+  sliderState.set(grid, {
+    pagination,
+    onDotClick,
+    onScroll,
+    clearSnapTimer: () => {
+      if (snapTimer) {
+        window.clearTimeout(snapTimer);
+        snapTimer = null;
+      }
+    },
+  });
+  updatePagination();
+};
+
 const syncMobileSwipers = () => {
   const isMobile = window.innerWidth <= 720;
   swipeGrids.forEach((grid) => {
-    const cardCount = Array.from(grid.children).filter((child) => child.matches("article, a, div, li")).length;
-    if (isMobile && cardCount > 2) {
+    const disableSwipe = grid.classList.contains("editorial-values");
+    const cardCount = Array.from(grid.children).filter((child) => !child.classList.contains("swipe-clone") && child.matches("article, a, div, li")).length;
+    if (isMobile && cardCount > 2 && !disableSwipe) {
       grid.classList.add("swipe-track");
+      setupLoopTrack(grid);
     } else {
       grid.classList.remove("swipe-track");
+      cleanupLoopTrack(grid);
     }
   });
 };
