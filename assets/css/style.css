@@ -84,7 +84,7 @@ textarea {
 }
 
 .section {
-  padding: 6.5rem 0;
+  padding: 3.25rem 0;
   position: relative;
 }
 
@@ -1214,7 +1214,7 @@ body.cookie-banner-visible {
 
 @media (max-width: 720px) {
   .section {
-    padding: 4.5rem 0;
+    padding: 2.25rem 0;
   }
 
   .container {
