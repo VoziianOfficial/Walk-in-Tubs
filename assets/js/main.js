@@ -158,23 +158,6 @@ if (nav && navToggle) {
     window.scrollTo(0, scrollY);
   };
 
-  const closeNav = () => {
-    if (!mobilePanel) return;
-
-    mobilePanel.classList.remove("is-open");
-    mobilePanel.setAttribute("aria-hidden", "true");
-    navToggle.setAttribute("aria-expanded", "false");
-    navToggle.setAttribute("aria-label", "Open menu");
-
-    if (accordionToggle && accordionPanel) {
-      accordionToggle.setAttribute("aria-expanded", "false");
-      accordionPanel.setAttribute("aria-hidden", "true");
-      accordionPanel.classList.remove("is-open");
-    }
-
-    unlockScroll();
-  };
-
   const iconMap = {
     home: '<svg viewBox="0 0 24 24" role="img" focusable="false"><path d="M4 10l8-6 8 6v9H4z" /><path d="M9 19v-5h6v5" /></svg>',
     services: '<svg viewBox="0 0 24 24" role="img" focusable="false"><path d="M5 7h14" /><path d="M5 12h14" /><path d="M5 17h14" /></svg>',
@@ -193,13 +176,16 @@ if (nav && navToggle) {
     if (!el || el.querySelector(".mobile-menu-link-icon")) return;
     const label = (el.textContent || "").trim();
     el.textContent = "";
+
     const icon = document.createElement("span");
     icon.className = "mobile-menu-link-icon";
     icon.setAttribute("aria-hidden", "true");
     icon.innerHTML = iconMap[key] || iconMap.services;
+
     const text = document.createElement("span");
     text.className = "mobile-menu-link-text";
     text.textContent = label;
+
     el.appendChild(icon);
     el.appendChild(text);
   };
@@ -215,13 +201,16 @@ if (nav && navToggle) {
   ensureMenuIcon(mobilePanel?.querySelector('.mobile-menu-nav > a[href*="index.html"]'), "home");
   ensureMenuIcon(mobilePanel?.querySelector('.mobile-menu-nav > a[href*="about.html"]'), "about");
   ensureMenuIcon(mobilePanel?.querySelector('.mobile-menu-nav > a[href*="contact.html"]'), "contact");
-  ensureMenuIcon(mobilePanel?.querySelector('.mobile-menu-all-services'), "all");
+  ensureMenuIcon(mobilePanel?.querySelector(".mobile-menu-all-services"), "all");
   ensureMenuIcon(mobilePanel?.querySelector('.mobile-menu-accordion-panel a[href*="walk-in-tub-installation"]'), "install");
   ensureMenuIcon(mobilePanel?.querySelector('.mobile-menu-accordion-panel a[href*="walk-in-tub-replacement"]'), "replace");
   ensureMenuIcon(mobilePanel?.querySelector('.mobile-menu-accordion-panel a[href*="walk-in-tub-repair"]'), "repair");
   ensureMenuIcon(mobilePanel?.querySelector('.mobile-menu-accordion-panel a[href*="bathtub-safety-modifications"]'), "safety");
   ensureMenuIcon(mobilePanel?.querySelector('.mobile-menu-accordion-panel a[href*="contact.html"]'), "consult");
-  const maintenanceLink = Array.from(mobilePanel?.querySelectorAll(".mobile-menu-accordion-panel a") || []).find((link) => (link.textContent || "").includes("Maintenance"));
+
+  const maintenanceLink = Array.from(mobilePanel?.querySelectorAll(".mobile-menu-accordion-panel a") || []).find(
+    (link) => (link.textContent || "").includes("Maintenance")
+  );
   ensureMenuIcon(maintenanceLink, "maintenance");
 
   if (accordionToggle && !accordionToggle.querySelector(".mobile-menu-link-icon")) {
@@ -230,6 +219,7 @@ if (nav && navToggle) {
     icon.className = "mobile-menu-link-icon";
     icon.setAttribute("aria-hidden", "true");
     icon.innerHTML = iconMap.services;
+
     if (label) {
       const wrap = document.createElement("span");
       wrap.className = "mobile-menu-link-label";
@@ -247,6 +237,38 @@ if (nav && navToggle) {
     navToggle.setAttribute("aria-expanded", "true");
     navToggle.setAttribute("aria-label", "Close menu");
     lockScroll();
+
+    requestAnimationFrame(() => {
+      mobileCloseButton?.focus();
+    });
+  };
+
+  const closeNav = () => {
+    if (!mobilePanel) return;
+
+    const focusedInsideMenu =
+      mobilePanel.contains(document.activeElement) ? document.activeElement : null;
+
+    if (focusedInsideMenu && typeof focusedInsideMenu.blur === "function") {
+      focusedInsideMenu.blur();
+    }
+
+    mobilePanel.classList.remove("is-open");
+    mobilePanel.setAttribute("aria-hidden", "true");
+    navToggle.setAttribute("aria-expanded", "false");
+    navToggle.setAttribute("aria-label", "Open menu");
+
+    if (accordionToggle && accordionPanel) {
+      accordionToggle.setAttribute("aria-expanded", "false");
+      accordionPanel.setAttribute("aria-hidden", "true");
+      accordionPanel.classList.remove("is-open");
+    }
+
+    unlockScroll();
+
+    requestAnimationFrame(() => {
+      navToggle.focus();
+    });
   };
 
   navToggle.addEventListener("click", () => {
@@ -288,7 +310,6 @@ if (nav && navToggle) {
   });
 }
 
-
 if (footerLegal && !footerLegal.querySelector(".legal-links")) {
   const legalNav = document.createElement("nav");
   legalNav.className = "legal-links";
@@ -304,7 +325,6 @@ if (footerLegal && !footerLegal.querySelector(".legal-links")) {
   footerLegal.appendChild(legalNav);
 }
 
-
 faqButtons.forEach((button) => {
   button.addEventListener("click", () => {
     const item = button.closest(".faq-item");
@@ -313,7 +333,6 @@ faqButtons.forEach((button) => {
     item?.classList.toggle("is-open", !expanded);
   });
 });
-
 
 forms.forEach((form) => {
   form.addEventListener(
