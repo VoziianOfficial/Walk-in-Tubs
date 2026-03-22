@@ -247,6 +247,10 @@ textarea:focus-visible {
   outline-offset: 3px;
 }
 
+#contact-form {
+  scroll-margin-top: 7.2rem;
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -416,6 +420,42 @@ textarea:focus-visible {
 .header-phone:hover {
   transform: translateY(-2px);
   box-shadow: 0 18px 34px rgba(22, 24, 25, 0.22);
+}
+
+.header-ask {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border-radius: 999px;
+  min-height: 3.3rem;
+  padding: 0.9rem 1.15rem;
+  border: 1px solid rgba(23, 28, 32, 0.16);
+  background: rgba(255, 253, 250, 0.84);
+  color: #1a2228;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.72rem;
+  box-shadow: 0 14px 28px rgba(22, 24, 25, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.header-ask svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.header-ask:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 253, 250, 0.96);
+  border-color: rgba(23, 28, 32, 0.26);
+  box-shadow: 0 18px 34px rgba(22, 24, 25, 0.12);
 }
 
 .desktop-phone {
@@ -893,6 +933,10 @@ body.cookie-banner-visible {
   }
 
   .desktop-phone {
+    display: none;
+  }
+
+  .header-ask {
     display: none;
   }
 

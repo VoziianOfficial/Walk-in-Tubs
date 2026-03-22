@@ -20,6 +20,19 @@ body[data-page="services"] .site-header .brand {
   color: rgba(244, 241, 234, 0.95);
 }
 
+body[data-page="services"] .header-ask {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.18);
+  color: rgba(244, 241, 234, 0.92);
+  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.36);
+}
+
+body[data-page="services"] .header-ask:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.28);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.46);
+}
+
 body[data-page="services"] .site-nav a:hover,
 body[data-page="services"] .site-nav a.is-active {
   color: rgba(244, 241, 234, 0.95);

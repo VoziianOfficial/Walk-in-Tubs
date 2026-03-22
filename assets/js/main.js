@@ -8,6 +8,14 @@ const forms = document.querySelectorAll("form[data-form-type]");
 const revealTargets = document.querySelectorAll(
   ".feature-card, .service-card, .detail-card, .contact-card, .contact-info-card, .service-overview-card, .step-card, .faq-item, .value-item, .quote-panel, .editorial-image"
 );
+
+const legalRootPrefix = window.location.pathname.includes("/services/") ? "../" : "";
+const legalLinks = [
+  { href: `${legalRootPrefix}terms-of-service.html`, label: "Terms" },
+  { href: `${legalRootPrefix}privacy-policy.html`, label: "Privacy" },
+  { href: `${legalRootPrefix}cookie-policy.html`, label: "Cookie Policy" },
+];
+
 const brandMarks = document.querySelectorAll(".brand-mark");
 
 const bathLogoIcon = `
@@ -45,12 +53,33 @@ document.querySelectorAll(".mobile-menu-brand").forEach((brandLink) => {
   brandLink.appendChild(text);
 });
 
-const legalRootPrefix = window.location.pathname.includes("/services/") ? "../" : "";
-const legalLinks = [
-  { href: `${legalRootPrefix}terms-of-service.html`, label: "Terms" },
-  { href: `${legalRootPrefix}privacy-policy.html`, label: "Privacy" },
-  { href: `${legalRootPrefix}cookie-policy.html`, label: "Cookie Policy" },
-];
+document.querySelectorAll(".header-actions").forEach((actions) => {
+  if (actions.querySelector(".header-ask")) return;
+
+  const ask = document.createElement("a");
+  ask.className = "header-ask";
+  ask.href = `${legalRootPrefix}contact.html#contact-form`;
+  ask.setAttribute("aria-label", "Ask a question");
+  ask.innerHTML = `
+    <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
+      <path d="M21 15a4 4 0 0 1-4 4H9l-4 2v-2a4 4 0 0 1-2-3.5V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z" />
+      <path d="M10.3 9.1a2.2 2.2 0 0 1 4 1c0 1.4-1.4 1.8-1.9 2.4-.2.2-.3.5-.3.9" />
+      <path d="M12 16.9h.01" />
+    </svg>
+    <span>Ask a Question</span>
+  `;
+
+  const desktopPhone = actions.querySelector(".desktop-phone");
+  const navToggleButton = actions.querySelector(".nav-toggle");
+
+  if (desktopPhone) {
+    desktopPhone.insertAdjacentElement("afterend", ask);
+  } else if (navToggleButton) {
+    navToggleButton.insertAdjacentElement("beforebegin", ask);
+  } else {
+    actions.appendChild(ask);
+  }
+});
 
 if (header) {
   const syncHeader = () => header.classList.toggle("is-scrolled", window.scrollY > 18);
