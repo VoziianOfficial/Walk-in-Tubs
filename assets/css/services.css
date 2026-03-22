@@ -16,6 +16,10 @@ body[data-page="services"] .brand-text small {
   color: rgba(228, 225, 218, 0.72);
 }
 
+body[data-page="services"] .site-header .brand {
+  color: rgba(244, 241, 234, 0.95);
+}
+
 body[data-page="services"] .site-nav a:hover,
 body[data-page="services"] .site-nav a.is-active {
   color: rgba(244, 241, 234, 0.95);

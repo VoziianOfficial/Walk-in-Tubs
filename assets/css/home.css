@@ -660,7 +660,25 @@
   }
 
   .hero-insight-content {
-    padding: 1.1rem 0.1rem 0;
+    padding: 1.2rem 1rem 0.95rem;
+    border-radius: 18px;
+    background: linear-gradient(140deg,
+        rgba(255, 253, 249, 0.56),
+        rgba(255, 253, 249, 0.2));
+  }
+
+  .hero-insight-list {
+    gap: 0.62rem;
+  }
+
+  .hero-insight-list li {
+    padding-top: 0.66rem;
+    gap: 0.58rem;
+  }
+
+  .hero-insight-list li p {
+    font-size: 0.88rem;
+    line-height: 1.48;
   }
 
   .service-overview-card {

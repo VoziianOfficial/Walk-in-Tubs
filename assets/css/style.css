@@ -273,12 +273,30 @@ textarea:focus-visible {
 .brand {
   display: inline-flex;
   align-items: center;
-  gap: 0;
+  gap: 0.56rem;
   min-width: 0;
+  color: #1a2228;
 }
 
 .brand-mark {
-  display: none;
+  display: inline-grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  font-size: 0;
+  line-height: 0;
+  flex: 0 0 1.9rem;
+  color: currentColor;
+}
+
+.brand-mark svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .brand-text {
@@ -292,6 +310,13 @@ textarea:focus-visible {
   font-size: 1.6rem;
   letter-spacing: -0.04em;
   line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.48rem;
+}
+
+.brand-text strong::before {
+  content: none;
 }
 
 .brand-text small {
@@ -302,6 +327,10 @@ textarea:focus-visible {
 
 .site-header .brand-text small {
   display: none;
+}
+
+.site-footer .brand {
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .site-footer .brand-text strong {
@@ -936,10 +965,33 @@ body.cookie-banner-visible {
   }
 
   .mobile-menu-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
     font-family: "Fraunces", serif;
     font-size: 1.45rem;
     letter-spacing: -0.03em;
     color: #1a2228;
+  }
+
+  .mobile-menu-brand-icon {
+    width: 1.15rem;
+    height: 1.15rem;
+    flex: 0 0 1.15rem;
+    display: inline-grid;
+    place-items: center;
+    color: currentColor;
+    transform: translateY(-1px);
+  }
+
+  .mobile-menu-brand-icon svg {
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.7;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .mobile-menu-close {
@@ -985,6 +1037,9 @@ body.cookie-banner-visible {
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 0.56rem;
   }
 
   .mobile-menu-accordion-toggle {
@@ -1005,6 +1060,32 @@ body.cookie-banner-visible {
     stroke-linejoin: round;
     transition: transform 0.25s ease;
     flex-shrink: 0;
+  }
+
+  .mobile-menu-link-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.56rem;
+  }
+
+  .mobile-menu-link-icon {
+    width: 1.04rem;
+    height: 1.04rem;
+    flex: 0 0 1.04rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(23, 62, 59, 0.9);
+  }
+
+  .mobile-menu-link-icon svg {
+    width: 1.04rem;
+    height: 1.04rem;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.85;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   .mobile-menu-accordion-toggle[aria-expanded="true"] svg {
@@ -1033,6 +1114,9 @@ body.cookie-banner-visible {
   }
 
   .mobile-menu-accordion-panel a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.56rem;
     min-height: 2.5rem;
     padding: 0.65rem 0.85rem;
     border: 1px solid rgba(23, 28, 32, 0.1);
@@ -1043,6 +1127,12 @@ body.cookie-banner-visible {
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+  }
+
+  .mobile-menu-all-services {
+    border-color: rgba(23, 62, 59, 0.24) !important;
+    background: rgba(235, 247, 241, 0.74) !important;
+    color: rgba(23, 62, 59, 0.96) !important;
   }
 
   .mobile-menu-contact {
@@ -1095,6 +1185,12 @@ body.cookie-banner-visible {
     font-size: 1.35rem;
   }
 
+  .brand-mark {
+    width: 1.6rem;
+    height: 1.6rem;
+    flex-basis: 1.6rem;
+  }
+
   .page-hero {
     padding: 6.6rem 0 4rem;
   }
@@ -1112,10 +1208,20 @@ body.cookie-banner-visible {
   .feature-card,
   .service-card,
   .detail-card,
+  .contact-card,
   .contact-info-card,
   .step-card,
   .service-overview-card {
     padding: 1.5rem;
+  }
+
+  .section-heading {
+    margin-bottom: 1.85rem;
+  }
+
+  p,
+  li {
+    line-height: 1.68;
   }
 
   .split-panel,
@@ -1184,6 +1290,10 @@ body.cookie-banner-visible {
   .swipe-dot.is-active {
     width: 1.25rem;
     background: linear-gradient(135deg, rgba(23, 62, 59, 0.94), rgba(184, 139, 74, 0.9));
+  }
+
+  .site-footer {
+    padding-top: 3.7rem;
   }
 }
 
