@@ -87,6 +87,49 @@ if (header) {
   window.addEventListener("scroll", syncHeader, { passive: true });
 }
 
+const normalizePathname = (pathname) => {
+  if (!pathname) return "";
+  const stripped = pathname.split("?")[0].split("#")[0];
+  return stripped.endsWith("/") ? `${stripped}index.html` : stripped;
+};
+
+const setActiveNav = () => {
+  const currentPath = normalizePathname(window.location.pathname);
+  const currentLeaf = currentPath.split("/").pop() || "index.html";
+  const isServiceDetail = currentPath.includes("/services/");
+
+  const navLinks = document.querySelectorAll(".site-nav a, .mobile-menu-nav > a");
+  navLinks.forEach((link) => {
+    link.classList.remove("is-active");
+    link.removeAttribute("aria-current");
+  });
+
+  const pickTargetLeaf = () => {
+    if (isServiceDetail) return "services.html";
+    if (currentLeaf === "") return "index.html";
+    return currentLeaf;
+  };
+
+  const targetLeaf = pickTargetLeaf();
+  const candidates = Array.from(navLinks).filter((link) => {
+    try {
+      const linkPath = normalizePathname(new URL(link.getAttribute("href"), window.location.href).pathname);
+      const linkLeaf = linkPath.split("/").pop();
+      return linkLeaf === targetLeaf;
+    } catch {
+      return false;
+    }
+  });
+
+  const activeLink = candidates[0];
+  if (activeLink) {
+    activeLink.classList.add("is-active");
+    activeLink.setAttribute("aria-current", "page");
+  }
+};
+
+setActiveNav();
+
 if (nav && navToggle) {
   const mobilePanel = document.getElementById("mobile-menu-panel");
   const mobileCloseButton = mobilePanel?.querySelector(".mobile-menu-close");
