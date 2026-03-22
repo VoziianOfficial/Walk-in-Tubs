@@ -350,16 +350,6 @@ body[data-page="services"] .site-nav a::after {
     padding-bottom: 2rem;
   }
 
-  body[data-page="services"] .site-nav.is-open a,
-  body[data-page="services"] .site-nav.is-open a:hover,
-  body[data-page="services"] .site-nav.is-open a.is-active {
-    color: #2b3439;
-  }
-
-  body[data-page="services"] .site-nav.is-open .mobile-services-menu a {
-    color: #2b3439;
-  }
-
   .service-grid {
     grid-template-columns: 1fr;
   }

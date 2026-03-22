@@ -57,6 +57,37 @@
   box-shadow: var(--shadow-strong);
 }
 
+.detail-card h2,
+.service-identity-card h2,
+.cta-box h2 {
+  position: relative;
+  padding-bottom: 0.8rem;
+}
+
+.detail-card h2::after,
+.service-identity-card h2::after,
+.cta-box h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 4.4rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(23, 62, 59, 0.9), rgba(184, 139, 74, 0.9), rgba(23, 62, 59, 0.9));
+  background-size: 200% 100%;
+  animation: stripeFlow 3.8s linear infinite;
+}
+
+@keyframes stripeFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
 @media (max-width: 920px) {
   .content-grid {
     grid-template-columns: 1fr;
@@ -96,5 +127,13 @@
 
   .detail-card {
     border-radius: 18px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-card h2::after,
+  .service-identity-card h2::after,
+  .cta-box h2::after {
+    animation: none;
   }
 }

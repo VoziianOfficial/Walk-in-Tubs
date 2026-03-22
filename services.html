@@ -13,44 +13,96 @@
   <link rel="stylesheet" href="assets/css/services.css">
 </head>
 <body data-page="services">
-  <header class="site-header">
-    <div class="container header-shell">
-      <a class="brand" href="index.html" aria-label="Bathing Pro home">
-        <span class="brand-mark">WT</span>
-        <span class="brand-text">
-          <strong>Bathing Pro</strong>
-          <small>Compare local providers with confidence</small>
-        </span>
+<header class="site-header">
+  <div class="container header-shell">
+    <a class="brand" href="index.html" aria-label="Bathing Pro home">
+      <span class="brand-mark">WT</span>
+      <span class="brand-text">
+        <strong>Bathing Pro</strong>
+        <small>Compare local providers with confidence</small>
+      </span>
+    </a>
+
+    <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
+      <a href="index.html" class="is-active">Home</a>
+      <a href="services.html">Services</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="header-actions">
+      <a class="header-phone mobile-phone" href="tel:+18885550194" aria-label="Call now">
+        <span aria-hidden="true">☎</span>
       </a>
-      <nav class="site-nav" id="site-nav" aria-label="Primary navigation">
-        <a href="index.html">Home</a>
-        <a href="services.html" class="is-active">Services</a>
-        <a href="about.html">About</a>
-        <a href="contact.html">Contact</a>
-      </nav>
-      <div class="header-actions">
-        <a class="header-phone mobile-phone" href="tel:+18885550194" aria-label="Call now">
-          <span aria-hidden="true">☎</span>
-        </a>
-        <a class="header-phone desktop-phone" href="tel:+18885550194">
-          <span aria-hidden="true">☎</span>
-          <span>Get Estimate</span>
-        </a>
-        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
-          <span class="nav-icon nav-icon-open" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="img" focusable="false">
-              <path d="M4 7h16M4 12h16M4 17h16" />
-            </svg>
-          </span>
-          <span class="nav-icon nav-icon-close" aria-hidden="true">
-            <svg viewBox="0 0 24 24" role="img" focusable="false">
-              <path d="M6 6l12 12M18 6l-12 12" />
-            </svg>
-          </span>
-        </button>
-      </div>
+
+      <a class="header-phone desktop-phone" href="tel:+18885550194">
+        <span aria-hidden="true">☎</span>
+        <span>Call Now (888) 555-0194</span>
+      </a>
+
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu-panel"
+        aria-label="Open menu">
+        <span class="nav-icon nav-icon-open" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img" focusable="false">
+            <path d="M4 7h16M4 12h16M4 17h16" />
+          </svg>
+        </span>
+        <span class="nav-icon nav-icon-close" aria-hidden="true">
+          <svg viewBox="0 0 24 24" role="img" focusable="false">
+            <path d="M6 6l12 12M18 6l-12 12" />
+          </svg>
+        </span>
+      </button>
     </div>
-  </header>
+  </div>
+</header>
+
+<aside class="mobile-menu-panel" id="mobile-menu-panel" aria-hidden="true" aria-label="Mobile navigation">
+  <div class="mobile-menu-shell">
+    <div class="mobile-menu-topbar">
+      <a class="mobile-menu-brand" href="index.html">Bathing Pro</a>
+
+      <button type="button" class="mobile-menu-close" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
+          <path d="M6 6l12 12M18 6l-12 12" />
+        </svg>
+      </button>
+    </div>
+
+    <nav class="mobile-menu-nav" aria-label="Mobile primary navigation">
+      <a href="index.html">Home</a>
+
+      <div class="mobile-menu-accordion-item">
+        <button type="button" class="mobile-menu-accordion-toggle" aria-expanded="false"
+          aria-controls="mobile-services-submenu">
+          <span>Services</span>
+          <svg viewBox="0 0 24 24" role="img" focusable="false" aria-hidden="true">
+            <path d="M7 10l5 5 5-5" />
+          </svg>
+        </button>
+
+        <div class="mobile-menu-accordion-panel" id="mobile-services-submenu" aria-hidden="true">
+          <a href="services/walk-in-tub-installation.html">Walk-In Tub Installation</a>
+          <a href="services/walk-in-tub-replacement.html">Walk-In Tub Replacement</a>
+          <a href="services/walk-in-tub-repair.html">Walk-In Tub Repair</a>
+          <a href="services/bathtub-safety-modifications.html">Bath Safety Upgrades</a>
+          <a href="services/walk-in-tub-repair.html">Walk-In Tub Maintenance</a>
+          <a href="contact.html">Walk-In Tub Consultation</a>
+        </div>
+      </div>
+
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+
+    <div class="mobile-menu-contact">
+      <p>Contact</p>
+      <a href="tel:+18885550194">(888) 555-0194</a>
+      <a href="mailto:hello@walkintubguide.com">hello@walkintubguide.com</a>
+      <span>1201 Peachtree Street NE, Atlanta, GA 30361</span>
+    </div>
+  </div>
+</aside>
 
   <main>
     <section class="page-hero services-hero">

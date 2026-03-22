@@ -67,6 +67,30 @@ body[data-page="legal"] {
   margin: 0 0 0.7rem;
   font-size: clamp(1.8rem, 2.4vw, 2.4rem);
   line-height: 1.04;
+  position: relative;
+  padding-bottom: 0.72rem;
+}
+
+.legal-card h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 4.2rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(23, 62, 59, 0.9), rgba(184, 139, 74, 0.88), rgba(23, 62, 59, 0.9));
+  background-size: 200% 100%;
+  animation: legalStripeFlow 3.8s linear infinite;
+}
+
+@keyframes legalStripeFlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
 }
 
 .legal-card p {
@@ -123,5 +147,11 @@ body[data-page="legal"] {
   .legal-card p {
     font-size: 0.95rem;
     line-height: 1.65;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .legal-card h2::after {
+    animation: none;
   }
 }
